@@ -5,3 +5,12 @@ response = requests.get(url)
 
 soup = BeautifulSoup(response.text,'lxml')
 
+items = soup.find_all('div', class_='col-lg-4 col-md-6 mb-4')
+
+count = 1
+
+for item in items:
+  itemName = item.find('h4', class_='card-title').text.strip('\n')
+  itemPrice = item.find('h5').text
+  print( '%s ) Price: %s, Item name: %s' % ( count, itemPrice, itemName))
+  count += 1
